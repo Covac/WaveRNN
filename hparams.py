@@ -93,5 +93,8 @@ tts_checkpoint_every = 2_000        # checkpoints the model every X steps
 # TODO: tts_phoneme_prob = 0.0              # [0 <-> 1] probability for feeding model phonemes vrs graphemes
 
 
-# ------------------------------------------------------------------------------------------------------------------#
+#EXTRA ------------------------------------------------------------------------------------------------------------------#
 
+# Second storage
+enable_second_storage = False      # if enabled you will need to provide proper path
+second_storage_path = ''
