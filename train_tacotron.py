@@ -166,6 +166,12 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
                 ckpt_name = f'taco_step{k}K'
                 save_checkpoint('tts', paths, model, optimizer,
                                 name=ckpt_name, is_silent=True)
+                
+                if hp.enable_second_storage:
+                    spath = Path(hp.second_storage_path)
+                    if os.path.exists(spath):
+                        save_checkpoint('tts', spath, model, optimizer,
+                                       name=ckpt_name, is_silent=True)
 
             if attn_example in ids:
                 idx = ids.index(attn_example)
