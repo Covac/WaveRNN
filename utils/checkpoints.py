@@ -78,8 +78,8 @@ def save_checkpoint(checkpoint_type: str, paths: Paths, model, optimizer, *,
                                 
         if(secondary_storage):
             named_paths = {
-                'w': secondary_storage/f'{name}_weights.pyt',
-                'o': secondary_storage/f'{name}_optim.pyt',
+                'w': f'{secondary_storage}/{name}_weights.pyt',
+                'o': f'{secondary_storage}/{name}_optim.pyt',
             }
             helper(named_paths, True)
             
