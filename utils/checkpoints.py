@@ -69,8 +69,7 @@ def save_checkpoint(checkpoint_type: str, paths: Paths, model, optimizer, *,
         if not is_silent: print(f'Saving {s} optimizer state: {path_dict["o"]}')
         torch.save(optimizer.state_dict(), path_dict['o']
 
-    weights_path, optim_path, checkpoint_path = \
-        get_checkpoint_paths(checkpoint_type, paths)
+    weights_path, optim_path, checkpoint_path = get_checkpoint_paths(checkpoint_type, paths)
 
     latest_paths = {'w': weights_path, 'o': optim_path}
     helper(latest_paths, False)
