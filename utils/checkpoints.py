@@ -27,7 +27,7 @@ def get_checkpoint_paths(checkpoint_type: str, paths: Paths):
 
 
 def save_checkpoint(checkpoint_type: str, paths: Paths, model, optimizer, *,
-        name=None, is_silent=False):
+        name=None, is_silent=False, secondary_storage=False):
     """Saves the training session to disk.
 
     Args:
@@ -39,6 +39,7 @@ def save_checkpoint(checkpoint_type: str, paths: Paths, model, optimizer, *,
             will always update the files specified in `paths` that give the
             location of the latest weights and optimizer state. Saving
             a named checkpoint happens in addition to this update.
+        secondary_storage: Will save checkpoint to aditional location if path is provided.
     """
     def helper(path_dict, is_named):
         s = 'named' if is_named else 'latest'
@@ -73,7 +74,16 @@ def save_checkpoint(checkpoint_type: str, paths: Paths, model, optimizer, *,
             'w': checkpoint_path/f'{name}_weights.pyt',
             'o': checkpoint_path/f'{name}_optim.pyt',
         }
+        
+    helper(named_paths, True)
+                                
+    if(secondary_storage):
+        named_paths = {
+            'w': secondary_storage/f'{name}_weights.pyt',
+            'o': secondary_storage/f'{name}_optim.pyt',
+        }
         helper(named_paths, True)
+            
 
 
 def restore_checkpoint(checkpoint_type: str, paths: Paths, model, optimizer, *,
