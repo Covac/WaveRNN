@@ -62,6 +62,12 @@ def save_checkpoint(checkpoint_type: str, paths: Paths, model, optimizer, *,
         model.save(path_dict['w'])
         if not is_silent: print(f'Saving {s} optimizer state: {path_dict["o"]}')
         torch.save(optimizer.state_dict(), path_dict['o'])
+                                
+    def secondary_helper(path_dict):#should only be called if checkpoint is named
+        if not is_silent: print(f'Saving {s} weights: {path_dict["w"]}')
+        model.save(path_dict['w'])
+        if not is_silent: print(f'Saving {s} optimizer state: {path_dict["o"]}')
+        torch.save(optimizer.state_dict(), path_dict['o']
 
     weights_path, optim_path, checkpoint_path = \
         get_checkpoint_paths(checkpoint_type, paths)
